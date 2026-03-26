@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- SEO / Social -->
+  <meta name="description" content="UDT is a novel unsupervised framework for discovering fine-grained, class-level transformation directions within diffusion models. By incorporating hierarchy information into contrastive learning, UDT structures the latent space to enable precise and semantically consistent edits, such as changing a dog's breed while preserving its pose.">
+  <meta name="keywords" content="Diffusion Models, Unsupervised Learning, Latent Space Exploration, Fine-Grained Image Editing, Contrastive Learning, Image Transformation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="UDT: Unsupervised Discovery of Transformations between Fine-Grained Classes in Diffusion Models"/>
+  <meta property="og:description" content="UDT is a novel unsupervised framework for discovering fine-grained, class-level transformation directions within diffusion models. By incorporating hierarchy information into contrastive learning, UDT structures the latent space to enable precise and semantically consistent edits, such as changing a dog's breed while preserving its pose."/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <meta property="og:image" content="static/images/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+  <meta name="twitter:title" content="UDT: Unsupervised Discovery of Transformations between Fine-Grained Classes in Diffusion Models">
+  <meta name="twitter:description" content="UDT is a novel unsupervised framework for discovering fine-grained, class-level transformation directions within diffusion models. By incorporating hierarchy information into contrastive learning, UDT structures the latent space to enable precise and semantically consistent edits, such as changing a dog's breed while preserving its pose.">
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>UDT: Unsupervised Discovery of Transformations</title>
+  <link rel="icon" type="image/x-icon" href="static/images/ssu_icon.jpg">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- JS (3rd party) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <!-- MathJax config MUST come before the loader script -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      },
+      options: {
+        renderActions: {
+          addMenu: [] // (선택) 우클릭 메뉴 비활성화 원하면 유지
+        }
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              UDT: Unsupervised Discovery of Transformations between Fine-Grained Classes in Diffusion Models
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Youngjae Choi</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Hyunseo Koh</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/98hojae-jeong" target="_blank">Hojae Jeong</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="FOURTH AUTHOR PERSONAL LINK" target="_blank">Byungkwan Chae</a><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a href="FIFTH AUTHOR PERSONAL LINK" target="_blank">Sungyong Park</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://reality.ssu.ac.kr/members/faculty" target="_blank">Heewon Kim</a><sup>†</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                Soongsil University, Seoul, Republic of Korea <br>BMVC 2025
+              </span>
+              <span class="eql-cntrb">
+                <small><br><sup>*</sup>Indicates Equal Contribution &nbsp; <sup>†</sup>Indicates Corresponding author</small>
+              </span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="static/pdfs/UDT_BMVC_2025.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="static/pdfs/UDT_BMVC_2025_SUPP.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    <span>Supplementary</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" disabled>
+                    <span class="icon"><i class="fas fa-video"></i></span>
+                    <span>Video (TBD)</span>
+                  </a>
+                </span>
+               
+
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark" disabled>
+                    <span class="icon"><i class="fas fa-file-alt"></i></span>
+                    <span>Poster (TBD)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+
+          </div> <!-- column -->
+        </div> <!-- columns -->
+      </div> <!-- container -->
+    </div> <!-- hero-body -->
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">TL;DR</h2>
+          <div class="content has-text-justified">
+            <p>
+              UDT is an unsupervised framework that uses parent-class guided noise decomposition to achieve breed-to-breed translation directions across diverse domains like dogs, cats, flowers, and birds.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Diffusion models achieve impressive image synthesis, yet unsupervised methods for latent space exploration remain limited in fine-grained class translation. Existing approaches struggle with fine-grained class translation, often producing low-diversity outputs within parent classes or inconsistent child-class mappings across images.
+              We propose <code>UDT</code> (<b>U</b>nsupervised <b>D</b>iscovery of <b>T</b>ransformations), a framework that incorporates hierarchical structure into unsupervised direction discovery. <code>UDT</code> leverages parent-class prompts to decompose predicted noise into class-general and class-specific components, ensuring translations remain within the parent domain while enabling disentangled child-class transformations. A hierarchy-aware contrastive loss further enforces consistency, with each direction corresponding to a distinct child class.
+              Experiments on dogs, cats, birds, and flowers show that <code>UDT</code> outperforms state-of-the-art methods both qualitatively and quantitatively. Moreover, <code>UDT</code> supports controllable interpolation, allowing for the smooth generation of intermediate classes (<i>e.g.</i>, mixed breeds). These results demonstrate <code>UDT</code> as a general and effective solution for fine-grained image translation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="title is-3 has-text-centered">Motivation</h2>
+        <div class="item">
+          <img src="static/images/intro.png" alt="Motivation Figure" />
+          <div class="content has-text-justified">
+            <p>
+              Recent unsupervised approaches for diffusion models attempt to discover semantic directions by exploring intermediate features of the U-Net or operating in the predicted noise space. 
+              However, despite these advances, unsupervised methods face notable shortcomings when applied to fine-grained class translation.
+              First, the diversity of generated outputs is insufficient; discovered directions often tend to generate only low-diversity variations within a parent class (e.g., different types of dog) or drift into unrelated classes (e.g., cat, food). 
+              Second, discovered directions lack consistency across images: the same direction may corre spond todifferent child classes depending on the input, requiring users to search for a desirable transformation manually.
+              These limitations limit their applicability in scenarios that require reliable, fine-grained control, such as breed-to-breed transformations
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-small">
+    <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+
+        <div class="item">
+          <img src="static/images/method.png" alt="method_figure"/>
+          <div class="content has-text-justified">
+            <p>
+              <b>Overview of the <code>UDT</code> framework.</b> (a) <code>UDT</code> decomposes predicted noise divergence $\Delta\epsilon_k^n$ into a parent-class component $\Delta\mathcal{P}_k^n$ (general attributes) and a child-class component $\Delta\mathcal{T}_k^n$ (fine-grained traits). (b) Contrastive learning is then applied only to the child-class vectors, ensuring each discovered direction corresponds to a consistent child class. This hierarchical formulation enables <code>UDT</code> to discover interpretable directions for fine-grained class translation, later used in the image translation pipeline (c).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Visualizing discovered transformations by UDT</h2>
+          <img src="static/images/variousdomain.png" alt="method_figure"/>
+          <div class="content has-text-justified">
+            <p>
+              <code>UDT</code> discovers semantically distinct and interpretable transformation directions across diverse domains, including animals, flowers, and human faces. 
+              For instance, in the dog domain, it successfully discovers numerous distinct breed transformations, producing the characteristic wrinkled faces of a <em>Bulldog</em> or the flowing golden coats of a <em>Golden Retriever</em>. 
+              Similar capabilities are observed in other categories; <code>UDT</code> accurately alters breed-defining traits in cats, such as fur color and ear length, and for human faces, it can produce either <em></em>Asian</em> or more <em></em>Western</em> facial features.
+              These results demonstrate <code>UDT</code>'s capability to discover semantically meaningful features and identify distinctive visual variations within each domain without any explicit labels during training.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Qualitative Comparison</h2>
+          <img src="static/images/comparison_others.png" alt="Qualitative comparison with other methods"/>
+          <div class="content has-text-justified">
+            <p>
+              <code>UDT</code>  was qualitatively compared against state-of-the-art unsupervised, self-supervised, and image editing methods. 
+              While competing unsupervised and self-supervised methods struggled to find adequate transformation directions for specific target dog breeds, <code>UDT</code> successfully transformed images to the intended breed. 
+              Furthermore, <code>UDT</code> demonstrated superior performance over existing editing methods in certain aspects. 
+              Specifically, it better represented the fine curly texture of a <em>Toy Poodle</em> than LEDITS++ and was more effective at maintaining the original pose during edits compared to Null-Text.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Classification Accuracy on Class Translation</h2>
+          <img src="static/images/table1.png" alt="Qualitative comparison with other methods"/>
+          <div class="content has-text-justified">
+            <p>
+              To quantitatively evaluate <code>UDT</code>'s effectiveness in capturing breed-specific characteristics, 100 learned translation directions were applied to 100 Pug images. 
+              The shifts in classification probability for these translated images were measured using a CLIP classifier, and the representative direction for each target breed was selected as the one yielding the highest CLIP score. 
+              The results confirmed <code>UDT</code>'s effectiveness, with diagonal entries in the results table showing substantial CLIP confidence boosts for the intended target breeds. 
+              For instance, a +43.24 confidence boost for the <em>'Golden Retriever'</em> transformation aligns with the ideal expectation that targeted semantic confidence should increase significantly while other semantic alterations are minimal.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Class Diversity on Class Translation</h2>
+          <img src="static/images/table2.png" alt="Qualitative comparison with other methods"/>
+          <div class="content has-text-justified">
+            <p>
+              To compare the diversity of breed transformations, <code>UDT</code>' and NoiseCLR were used to generate images from 100 distinct translation directions, with a CLIP classifier predicting the resulting breed for each image. 
+              UDT achieved an average of 50.43 distinct predicted breeds, substantially outperforming NoiseCLR's average of 15.57. 
+              This result highlights <code>UDT</code>'s superior capability in discovering a richer and more diverse set of breed-specific transformation directions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TO DO : ADD VIDEO -->
+  <!--
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-3">Video Presentation</h2>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <div class="publication-video">
+              <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- TO DO : ADD POSTER -->
+  <!--
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title">Poster</h2>
+        <iframe src="static/pdfs/sample.pdf" width="100%" height="550"></iframe>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{choi2025udt,
+  title={UDT: Unsupervised Discovery of Transformations between Fine-Grained Classes in Diffusion Models},
+  author={Choi, Youngjae and Koh, Hyunseo and Jeong, Hojae and Chae, Byungkwan and Park, Sungyong and Kim, Heewon},
+  booktitle={British Machine Vision Conference (BMVC)},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the
+              <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>
+              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page. <br>
+              This website is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
+                Creative Commons Attribution-ShareAlike 4.0 International License
+              </a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
