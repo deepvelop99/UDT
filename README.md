@@ -8,7 +8,7 @@ This repository contains the project page for **UDT**, accepted at **BMVC 2025**
 
 The project page is implemented in static HTML/CSS/JS and can be deployed on GitHub Pages or any static web server.
 
-- **Project Website**: [deepvelop99.github.io/UDT/](#)  
+- **Project Website**: [[deepvelop99.github.io/UDT/]](https://deepvelop99.github.io/UDT/)(#)  
 - **Paper (arXiv PDF)**: [PDF](static/pdfs/UDT_BMVC_2025.pdf) 
 - **Supplementary Material**: [PDF](static/pdfs/UDT_BMVC_2025_SUPP.pdf)  
 
